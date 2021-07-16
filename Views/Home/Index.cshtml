@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HomeModel>
+@{
+    ViewData["Title"] = "Home Page";
+    HomeModel editValue = (HomeModel)ViewData["edit"];
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (HomeModel p in Model)
+            {
+                <tr>
+                    <th>@p.Id</th>
+                    <td>@p.Name</td>
+                    <td>@p.LastName</td>
+                    <td>
+                    <a href="/home/edit/@p.Id">Edit</a> |
+                    <a href="/home/del/@p.Id" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form method="post" action="/home/edit">
+        <div class="row">
+            <input type="hidden" name="Id" value="@editValue.Id" />
+            <div class="col">
+                <input type="text" name="Name" class="form-control" placeholder="First name" value="@editValue.Name" required>
+            </div>
+            <div class="col">
+                <input type="text" name="LastName" class="form-control" placeholder="Last name" value="@editValue.LastName" required>
+            </div>
+            <div class="col">
+               <input type="submit" class="btn btn-primary" />
+                <input type="reset" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
