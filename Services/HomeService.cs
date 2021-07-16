@@ -26,13 +26,13 @@ namespace WebApplication_COS_MVC_CRUD_sample.Services
 
         public List<HomeModel> Edit(HomeModel model)
         {
-            rto = rto.Where(c => c.Id == model.Id)
-                .Select(x => new HomeModel()
-                {
+            var i = rto.FindIndex(c => c.Id == model.Id);
+            rto[i] = new HomeModel()
+            {
                     Id = model.Id,
                     Name = model.Name,
                     LastName = model.LastName
-                }).ToList();
+            };
 
             return rto;
         }
